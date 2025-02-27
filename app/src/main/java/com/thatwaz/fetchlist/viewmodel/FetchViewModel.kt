@@ -9,26 +9,32 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class FetchViewModel(private val repository: FetchRepository) : ViewModel() {
+    sealed class UiState {
+        object Loading : UiState()
+        data class Error(val message: String) : UiState()
+        data class Success(val items: List<FetchItem>) : UiState()
+    }
 
-    private val _items = MutableStateFlow<List<FetchItem>>(emptyList())
-    val items: StateFlow<List<FetchItem>> = _items
-
-    private val _expandedSections = MutableStateFlow<Set<Int>>(emptySet())
-    val expandedSections: StateFlow<Set<Int>> = _expandedSections
+    private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
+    val uiState: StateFlow<UiState> = _uiState
 
     init {
         fetchItems()
     }
 
-    fun fetchItems() {
+    fun fetchItems() { // ✅ This function is now public, so it can be called on Retry
         viewModelScope.launch {
-            _items.value = repository.getFilteredSortedItems()
+            _uiState.value = UiState.Loading
+            try {
+                val data = repository.getFilteredSortedItems()
+                _uiState.value = UiState.Success(data)
+            } catch (e: Exception) {
+                _uiState.value = UiState.Error("Failed to load data. Check your connection.")
+            }
         }
     }
-
-
-    fun updateExpandedSections(newSet: Set<Int>) {
-        _expandedSections.value = newSet
-    }
 }
+
+
+
 
