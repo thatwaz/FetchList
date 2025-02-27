@@ -14,10 +14,9 @@ val Shapes = Shapes(
     large = RoundedCornerShape(12.dp)
 )
 
-// 🎨 Fetch Rewards-Inspired Color Palette
 
 private val LightColors = lightColorScheme(
-    primary = Color(0xFFFFC107), // Fetch Gold/Yellow
+    primary = Color(0xFFFFC107), // Gold/Yellow
     onPrimary = Color.Black,
     secondary = Color(0xFF512DA8), // Deep Purple/Blue
     onSecondary = Color.White,
@@ -26,7 +25,7 @@ private val LightColors = lightColorScheme(
     onSurface = Color(0xFF424242), // Dark gray text
 )
 
-// ✅ Always apply light theme
+// Always apply light theme
 @Composable
 fun FetchListTheme(content: @Composable () -> Unit) {
     MaterialTheme(
