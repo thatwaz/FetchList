@@ -14,8 +14,8 @@ FetchList is a **native Android app** built using **Kotlin and Jetpack Compose**
 ✔ **Network error handling with retry option**  
 ✔ **Unit tests for repository filtering and sorting logic**  
 
-## 📸 Screenshots
-
+## 📸 Screenshot
+![Image](https://github.com/user-attachments/assets/14efd0c0-c2e3-4d77-82e9-5a486ed3d522)
 
 
 ## 🛠️ Tech Stack
